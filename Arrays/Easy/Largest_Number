@@ -1,0 +1,17 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int largest_number(const vector<int>&arr){
+    int largest=arr[0];
+    for(int i:arr){
+        largest=max(largest,i);
+    }
+    return largest;
+}
+int main(){
+    vector<int> arr1 = {2, 5, 1, 3, 0};
+    vector<int> arr2 = {8, 10, 5, 7, 9};
+    cout << "The Largest element in the array is: " << largest_number(arr1) << endl;
+    cout << "The Largest element in the array is: " << largest_number(arr2);
+    return 0;
+}
