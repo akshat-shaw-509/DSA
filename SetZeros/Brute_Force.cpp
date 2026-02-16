@@ -36,3 +36,10 @@ int main(){
     }
     return 0;
 }
+
+// Time Complexity-> O(m*n*(m+n)), We iterate through every cell (m*n),and for each zero, we mark its entire row (O(n)) and column (O(m)), leading to O(m*n*(m+n)) overall.
+// Space Complexity->  O(1),We are not using any extra data structures,only modifying the matrix in place.
+
+
+
+
