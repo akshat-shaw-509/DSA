@@ -1,0 +1,49 @@
+class Solution {
+public:
+    bool isSafe(vector<vector<char>>& board, int row, int col) {
+        int n = board.size();
+        for (int j = 0; j < n; j++) {
+            if (board[row][j] == 'Q')
+                return false;
+        }
+        for (int i = 0; i < n; i++) {
+            if (board[i][col] == 'Q')
+                return false;
+        }
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+            if (board[i][j] == 'Q')
+                return false;
+        }
+        for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {
+            if (board[i][j] == 'Q')
+                return false;
+        }
+        return true;
+    }
+    void helper(vector<vector<char>>& board, int row,
+                vector<vector<string>>& res) {
+        int n = board.size();
+        if (row == n) {
+            vector<string> temp;
+            for (int i = 0; i < n; i++) {
+                string s(board[i].begin(), board[i].end());
+                temp.push_back(s);
+            }
+            res.push_back(temp);
+            return;
+        }
+        for (int col = 0; col < n; col++) {
+            if (isSafe(board, row, col)) {
+                board[row][col] = 'Q';
+                helper(board, row + 1, res);
+                board[row][col] = '.';
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<char>> board(n, vector<char>(n, '.'));
+        vector<vector<string>> res;
+        helper(board, 0, res);
+        return res;
+    }
+};
