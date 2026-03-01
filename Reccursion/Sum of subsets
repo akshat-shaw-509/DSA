@@ -1,0 +1,27 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+void findSums(int idx,int currSum,vector<int>&nums,vector<int>&sums){
+    if(idx==nums.size()){
+        sums.push_back(currSum);
+        return;
+    }
+    findSums(idx+1,currSum+nums[idx],nums,sums);
+    findSums(idx+1,currSum,nums,sums);
+}
+vector<int>subsetSums(vector<int>&nums){
+    vector<int>res;
+    findSums(0,0,nums,res);
+    sort(res.begin(),res.end());
+    return res;
+}
+int main(){
+    vector<int> arr = {5, 2, 1};
+    vector<int> result = subsetSums(arr);
+    for (int sum : result) {
+        cout << sum << " ";
+    }
+    cout << endl;
+    return 0;
+}
