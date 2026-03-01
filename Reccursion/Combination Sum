@@ -1,0 +1,25 @@
+class Solution {
+public:
+void subset(int idx,int target,vector<int>&candidates,vector<int>&current,vector<vector<int>>&subsets){
+    if(target==0){
+        subsets.push_back(current);
+        return;
+    }
+    if(idx>=candidates.size()||target<0){
+        return;
+    }
+    current.push_back(candidates[idx]);
+    subset(idx+1,target-candidates[idx],candidates,current,subsets);
+    current.pop_back();
+    int next=idx+1;
+    while(next<candidates.size()&&candidates[idx]==candidates[next])next++;
+    subset(next,target,candidates,current,subsets);
+}
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<int>current;
+        vector<vector<int>>subsets;
+        sort(candidates.begin(),candidates.end());
+        subset(0,target,candidates,current,subsets);
+        return subsets;
+    }
+};
