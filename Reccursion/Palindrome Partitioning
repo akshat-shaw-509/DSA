@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool isPalindrome(string& s, int left, int right) {
+        while (left < right) {
+            if (s[left] != s[right])
+                return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+    void substr(int idx, string& s, vector<string>& current,
+                vector<vector<string>>& substring) {
+        if (idx == s.length()) {
+            substring.push_back(current);
+            return;
+        }
+        for (int i = idx; i < s.length(); i++) {
+            if (isPalindrome(s, idx, i)) {
+                current.push_back(s.substr(idx,i-idx+1));
+                substr(i+1, s, current, substring);
+                current.pop_back();
+            }
+        }
+    }
+    vector<vector<string>> partition(string s) {
+        vector<string> current;
+        vector<vector<string>> substring;
+        substr(0, s, current, substring);
+        return substring;
+    }
+};
