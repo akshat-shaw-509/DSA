@@ -1,0 +1,22 @@
+class Solution {
+public:
+void generateSubset(int idx,vector<int>&nums,vector<int>&current,vector<vector<int>>&subsets){
+    if(idx==nums.size()){
+        subsets.push_back(current);
+        return;
+    }
+    current.push_back(nums[idx]);
+    generateSubset(idx+1,nums,current,subsets);
+    current.pop_back();
+    int next=idx+1;
+    while(next<nums.size()&&nums[next]==nums[idx]) next++;
+    generateSubset(next,nums,current,subsets);
+}
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<int>current;
+        vector<vector<int>>subsets;
+        sort(nums.begin(),nums.end());
+        generateSubset(0,nums,current,subsets);
+        return subsets;
+    }
+};
